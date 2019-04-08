@@ -13,7 +13,7 @@ class AddUser(unittest.TestCase):
     def test_add_user(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd)
+        self.login(wd, username="admin", password="secret")
         self.open_add_new_page(wd)
         self.create_user(wd)
         self.logout(wd)
@@ -38,8 +38,8 @@ class AddUser(unittest.TestCase):
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(nickname)
         #wd.find_element_by_name("photo").click()
-       # wd.find_element_by_name("photo").clear()
-       # wd.find_element_by_name("photo").send_keys("C:\\fakepath\\photo1.jpg")
+        #wd.find_element_by_name("photo").clear()
+        #wd.find_element_by_name("photo").send_keys("D:\\fakepath\\Kovrik_Ferma-01.jpg")
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys(title)
@@ -101,12 +101,12 @@ class AddUser(unittest.TestCase):
         # logout
         wd.find_element_by_link_text("Logout").click()
 
-    def login(self, wd):
+    def login(self, wd, username, password):
         # Lonin
         wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_home_page(self, wd):
