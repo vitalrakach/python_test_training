@@ -1,31 +1,28 @@
 # -*- coding: utf-8 -*-
 
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.common.keys import Keys
-#from selenium.webdriver.support.ui import Select
-import unittest
+
+import pytest
 from group import Group
 from application import Application
 
-class test_add_group(unittest.TestCase):
 
-    def setUp(self):
-        self.app = Application()
-
-    def test_add_group(self):
-        self.app.login(username="admin", password="secret")
-        self.app.create_group(Group(name="new_group", header="new_group", footer="wow"))
-        self.app.logout()
-
-    def test_add_group_empty(self):
-        self.app.login(username="admin", password="secret")
-        self.app.create_group(Group(name="", header="", footer=""))
-        self.app.logout()
+@pytest.fixture
+def app(request):
+    fixture = Application()
+    request.addfinalizer(fixture.destroy)
+    return fixture
 
 
-    def tearDown(self):
-        self.app.destroy()
+def test_add_group(app):
+        app.login(username="admin", password="secret")
+        app.create_group(Group(name="new_group", header="new_group", footer="wow"))
+        app.logout()
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_add_group_empty(app):
+        app.login(username="admin", password="secret")
+        app.create_group(Group(name="", header="", footer=""))
+        app.logout()
+
+
+
