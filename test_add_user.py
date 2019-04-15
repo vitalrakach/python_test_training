@@ -13,9 +13,7 @@ class AddUser(unittest.TestCase):
 
     def test_add_user(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_add_new_page(wd)
         self.create_user(wd, New_user(firstname="Vital", middlename="Leonidovich", lastname="Rakach", nickname="v1t_al", title="ZAO", company="Adani", address="Minsk_work", home="1234567",
                          mobile="9876543", work="4394423", fax="3487654", email="rakach1@mail.com", email2="rakach2@mail.com", email3="rakach3@mail.com",
                          hompage="http://home.by", bday="5", bmonth="October", byear="1985", aday="15", amonth="October", ayear="1999", address2="Minsk_secondary",
@@ -28,6 +26,7 @@ class AddUser(unittest.TestCase):
 
     def create_user(self, wd, new_user):
         # create user
+        self.open_add_new_page(wd)
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(new_user.firstname)
@@ -96,6 +95,7 @@ class AddUser(unittest.TestCase):
         #submit adding user
         wd.find_element_by_xpath(
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
+        self.open_home_page(wd)
 
     def logout(self, wd):
         # logout
@@ -103,6 +103,7 @@ class AddUser(unittest.TestCase):
 
     def login(self, wd, username, password):
         # Lonin
+        self.open_home_page(wd)
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").clear()
