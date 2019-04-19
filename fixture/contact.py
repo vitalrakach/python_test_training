@@ -84,3 +84,9 @@ class ContactHelper:
         wd.find_element_by_xpath(
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
         self.app.open_home_page()
+
+
+    def open_home_page(self):
+        # open home page
+        wd = self.app.wd
+        wd.get("http://localhost/addressbook/")
