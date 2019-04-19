@@ -85,6 +85,16 @@ class ContactHelper:
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
         self.app.open_home_page()
 
+    def delete_first(self):
+        wd = self.app.wd
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+        # summit deletion
+        wd.find_element_by_xpath("//input[@type='button' and @value='Delete']").click()
+        wd.switch_to_alert().accept()
+
+        self.app.open_home_page()
+
 
     def open_home_page(self):
         # open home page
