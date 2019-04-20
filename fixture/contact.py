@@ -96,6 +96,17 @@ class ContactHelper:
         self.app.open_home_page()
 
 
+    def delete_all(self):
+        wd = self.app.wd
+        # select checkbox "Select all"
+        wd.find_element_by_id('MassCB').click()
+        # summit deletion for all contacts
+        wd.find_element_by_xpath("//input[@type='button' and @value='Delete']").click()
+        wd.switch_to_alert().accept()
+
+        self.app.open_home_page()
+
+
     def edit_first_contact(self, new_contact):
         wd = self.app.wd
         #open hompage
