@@ -1,6 +1,3 @@
-from model import group
-
-
 class GroupHelper:
 
     def __init__(self, app):
