@@ -184,6 +184,15 @@ class ContactHelper:
         self.app.open_home_page()
 
 
+    def add_contact_to_group(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # summit deletion
+        wd.find_element_by_name("add").click()
+        self.app.open_home_page()
+
+
     def open_home_page(self):
         # open home page
         wd = self.app.wd
