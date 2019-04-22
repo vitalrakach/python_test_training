@@ -92,6 +92,7 @@ class ContactHelper:
         # summit deletion
         wd.find_element_by_xpath("//input[@type='button' and @value='Delete']").click()
         wd.switch_to_alert().accept()
+        wd.find_elements_by_css_selector("div.msgbox")
 
         self.app.open_home_page()
 
@@ -103,6 +104,7 @@ class ContactHelper:
         # summit deletion for all contacts
         wd.find_element_by_xpath("//input[@type='button' and @value='Delete']").click()
         wd.switch_to_alert().accept()
+        wd.find_elements_by_css_selector("div.msgbox")
 
         self.app.open_home_page()
 
