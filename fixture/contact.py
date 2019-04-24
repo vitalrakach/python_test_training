@@ -87,6 +87,7 @@ class ContactHelper:
 
     def delete_first(self):
         wd = self.app.wd
+        self.app.open_home_page()
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # summit deletion
@@ -99,6 +100,7 @@ class ContactHelper:
 
     def delete_all(self):
         wd = self.app.wd
+        self.app.open_home_page()
         # select checkbox "Select all"
         wd.find_element_by_id('MassCB').click()
         # summit deletion for all contacts
