@@ -190,6 +190,7 @@ class ContactHelper:
 
     def add_contact_to_group(self):
         wd = self.app.wd
+        self.app.open_home_page()
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # summit deletion
