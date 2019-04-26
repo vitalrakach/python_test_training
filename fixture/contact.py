@@ -15,6 +15,15 @@ class ContactHelper:
         # create contact
         wd = self.app.wd
         self.open_add_contact_page()
+        # fill contact form
+        self.fill_contact_form(new_contact)
+        #submit adding user
+        wd.find_element_by_xpath(
+            "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
+        self.app.open_home_page()
+
+    def fill_contact_form(self, new_contact):
+        wd = self.app.wd
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(new_contact.firstname)
@@ -24,9 +33,9 @@ class ContactHelper:
         wd.find_element_by_name("lastname").send_keys(new_contact.lastname)
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(new_contact.nickname)
-        #wd.find_element_by_name("photo").click()
-        #wd.find_element_by_name("photo").clear()
-        #wd.find_element_by_name("photo").send_keys("D:\\fakepath\\Kovrik_Ferma-01.jpg")
+        # wd.find_element_by_name("photo").click()
+        # wd.find_element_by_name("photo").clear()
+        # wd.find_element_by_name("photo").send_keys("D:\\fakepath\\Kovrik_Ferma-01.jpg")
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys(new_contact.title)
@@ -80,10 +89,6 @@ class ContactHelper:
         wd.find_element_by_name("phone2").send_keys(new_contact.phone2)
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(new_contact.notes)
-        #submit adding user
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
-        self.app.open_home_page()
 
     def delete_first(self):
         wd = self.app.wd
