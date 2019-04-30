@@ -24,71 +24,49 @@ class ContactHelper:
 
     def fill_contact_form(self, new_contact):
         wd = self.app.wd
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(new_contact.firstname)
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(new_contact.middlename)
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(new_contact.lastname)
-        wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys(new_contact.nickname)
+        self.change_field_value("firstname", new_contact.firstname)
+        self.change_field_value("middlename", new_contact.middlename)
+        self.change_field_value("lastname", new_contact.lastname)
+        self.change_field_value("nickname", new_contact.nickname)
         # wd.find_element_by_name("photo").click()
         # wd.find_element_by_name("photo").clear()
         # wd.find_element_by_name("photo").send_keys("D:\\fakepath\\Kovrik_Ferma-01.jpg")
-        wd.find_element_by_name("title").click()
-        wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys(new_contact.title)
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(new_contact.company)
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(new_contact.address)
-        wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(new_contact.home)
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(new_contact.mobile)
-        wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(new_contact.work)
-        wd.find_element_by_name("fax").clear()
-        wd.find_element_by_name("fax").send_keys(new_contact.fax)
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(new_contact.email)
-        wd.find_element_by_name("email2").clear()
-        wd.find_element_by_name("email2").send_keys(new_contact.email2)
-        wd.find_element_by_name("email3").clear()
-        wd.find_element_by_name("email3").send_keys(new_contact.email3)
-        wd.find_element_by_name("homepage").clear()
-        wd.find_element_by_name("homepage").send_keys(new_contact.hompage)
-        wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(new_contact.bday)
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Birthday:'])[1]/following::option[7]").click()
+        self.change_field_value("title", new_contact.title)
+        self.change_field_value("company", new_contact.company)
+        self.change_field_value("address", new_contact.address)
+        self.change_field_value("home", new_contact.home)
+        self.change_field_value("mobile", new_contact.mobile)
+        self.change_field_value("work", new_contact.work)
+        self.change_field_value("fax", new_contact.fax)
+        self.change_field_value("email", new_contact.email)
+        self.change_field_value("email2", new_contact.email2)
+        self.change_field_value("email3", new_contact.email3)
+        self.change_field_value("homepage", new_contact.hompage)
+        self.change_listbox_value("bday", new_contact.bday)
         #wd.find_element_by_name("theform").click()
-        wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(new_contact.bmonth)
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Birthday:'])[1]/following::option[44]").click()
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(new_contact.byear)
-        wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(new_contact.aday)
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Anniversary:'])[1]/following::option[17]").click()
-        wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(new_contact.amonth)
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Anniversary:'])[1]/following::option[44]").click()
-        wd.find_element_by_name("ayear").click()
-        wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys(new_contact.ayear)
-        wd.find_element_by_name("address2").click()
-        wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys(new_contact.address2)
-        wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys(new_contact.phone2)
-        wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys(new_contact.notes)
+        self.change_listbox_value("bmonth", new_contact.bmonth)
+        self.change_field_value("byear", new_contact.byear)
+        self.change_listbox_value("aday", new_contact.aday)
+        self.change_listbox_value("amonth", new_contact.amonth)
+        self.change_field_value("ayear", new_contact.ayear)
+        self.change_field_value("address2", new_contact.address2)
+        self.change_field_value("phone2", new_contact.phone2)
+        self.change_field_value("notes", new_contact.notes)
+
+    def change_listbox_value(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
+            wd.find_element_by_xpath(
+                "(.//*[normalize-space(text()) and normalize-space(.)='Birthday:'])[1]/following::option[7]").click()
+
+    def change_field_value(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
     def delete_first(self):
         wd = self.app.wd
@@ -99,7 +77,6 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@type='button' and @value='Delete']").click()
         wd.switch_to_alert().accept()
         wd.find_elements_by_css_selector("div.msgbox")
-
         self.app.open_home_page()
 
 
