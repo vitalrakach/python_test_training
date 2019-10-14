@@ -1,4 +1,7 @@
 from selenium.webdriver.support.ui import Select
+from model.new_contact import New_contact
+from selenium.common.exceptions import NoSuchElementException
+
 
 class ContactHelper:
 
@@ -126,3 +129,19 @@ class ContactHelper:
         wd = self.app.wd
         self.app.open_home_page()
         return len(wd.find_elements_by_xpath('//*[@title="Edit"]'))
+
+
+    def get_contacts_list(self):
+        wd = self.app.wd
+        self.open_home_page()
+        try: wd.find_elements_by_css_selector("td.center")
+        except NoSuchElementException:
+            pass
+        # Формируем список групп
+        contacts_l = []
+        for element in wd.find_elements_by_css_selector("td.center"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts_l.append(New_contact(firstname=text, lastname=id))
+        return contacts_l
+
