@@ -8,7 +8,7 @@ def test_edit_first_group_name(app):
     old_groups = app.group.get_group_list()
     app.group.edit_first_group(Group(name="EDIT"))
     new_groups = app.group.get_group_list()
-    assert len(old_groups)  == len(new_groups)
+    assert len(old_groups) == len(new_groups)
 
 
 
@@ -18,7 +18,7 @@ def test_edit_first_group_header(app):
     old_groups = app.group.get_group_list()
     app.group.edit_first_group(Group(header="edit_group_HEADER"))
     new_groups = app.group.get_group_list()
-    assert len(old_groups)  == len(new_groups)
+    assert len(old_groups) == len(new_groups)
 
 
 def test_edit_first_group_footer(app):

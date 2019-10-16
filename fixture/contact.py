@@ -8,7 +8,6 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-
     def open_add_contact_page(self):
         # open add new page
         wd = self.app.wd
@@ -20,7 +19,7 @@ class ContactHelper:
         self.open_add_contact_page()
         # fill contact form
         self.fill_contact_form(new_contact)
-        #submit adding user
+        # submit adding user
         wd.find_element_by_xpath(
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
         self.app.open_home_page()
@@ -46,7 +45,7 @@ class ContactHelper:
         self.change_field_value("email3", new_contact.email3)
         self.change_field_value("homepage", new_contact.hompage)
         self.change_listbox_value("bday", new_contact.bday)
-        #wd.find_element_by_name("theform").click()
+        # wd.find_element_by_name("theform").click()
         self.change_listbox_value("bmonth", new_contact.bmonth)
         self.change_field_value("byear", new_contact.byear)
         self.change_listbox_value("aday", new_contact.aday)
@@ -82,7 +81,6 @@ class ContactHelper:
         wd.find_elements_by_css_selector("div.msgbox")
         self.app.open_home_page()
 
-
     def delete_all(self):
         wd = self.app.wd
         self.app.open_home_page()
@@ -95,19 +93,17 @@ class ContactHelper:
 
         self.app.open_home_page()
 
-
     def edit_first_contact(self, new_contact):
         wd = self.app.wd
-        #open hompage
+        # open hompage
         self.app.open_home_page()
         # find and click first icon by title
         wd.find_element_by_xpath('//*[@title="Edit"]').click()
         self.fill_contact_form(new_contact)
-        #submit updating user
+        # submit updating user
         wd.find_element_by_name("update").click()
         # open home page
         self.app.open_home_page()
-
 
     def add_contact_to_group(self):
         wd = self.app.wd
@@ -118,11 +114,11 @@ class ContactHelper:
         wd.find_element_by_name("add").click()
         self.app.open_home_page()
 
-
     def open_home_page(self):
         # open home page
         wd = self.app.wd
-        if not (wd.current_url.endswith("/index.php") or (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("searchstring")) > 0)):
+        if not (wd.current_url.endswith("/index.php") or (
+                wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("searchstring")) > 0)):
             wd.get("http://localhost/addressbook/")
 
     def count(self):
@@ -131,17 +127,15 @@ class ContactHelper:
         return len(wd.find_elements_by_xpath('//*[@title="Edit"]'))
 
 
-    def get_contacts_list(self):
+
+
+
+    def get_contact_list(self):
         wd = self.app.wd
         self.open_home_page()
-        try: wd.find_elements_by_css_selector("td.center")
-        except NoSuchElementException:
-            pass
-        # Формируем список групп
-        contacts_l = []
-        for element in wd.find_elements_by_css_selector("td.center"):
+        contacts = []
+        for element in wd.find_elements_by_name("entry"):
             text = element.text
             id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts_l.append(New_contact(firstname=text, lastname=id))
-        return contacts_l
-
+            contacts.append(New_contact(firstname=text, id=id))
+        return contacts

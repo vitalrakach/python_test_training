@@ -13,3 +13,5 @@ def test_delete_all_contacts(app):
                                     ayear="2000",
                                     address2="minsk", phone2="", notes=""))
         app.contact.delete_all()
+        contacts_count = app.contact.count()
+        assert contacts_count == 0

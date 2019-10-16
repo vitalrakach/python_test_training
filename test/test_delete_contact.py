@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.new_contact import New_contact
 
+
 def test_delete_contact(app):
     if app.contact.count() == 0:
             app.contact.create(
@@ -12,9 +13,8 @@ def test_delete_contact(app):
                                     hompage="", bday="1", bmonth="October", byear="1999", aday="5", amonth="January",
                                     ayear="2000",
                                     address2="minsk", phone2="", notes=""))
-    old_contacts = app.contact.get_contacts_list
+    old_contacts = app.contact.get_contact_list()
     app.contact.delete_first()
-    new_contacts = app.contact.get_contacts_list
- #   assert len(old_contacts) - 1 == len(new_contacts)
-    print(str(old_contacts))
-    print(str(new_contacts))
+    if not app.contact.count() == 0:
+            new_contacts = app.contact.get_contact_list()
+            assert len(old_contacts) - 1 == len(new_contacts)
