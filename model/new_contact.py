@@ -27,3 +27,11 @@ class New_contact:
         self.phone2 = phone2
         self.notes = notes
         self.id = id
+
+
+    def __repr__(self):
+        return "%s:%s:%s" % (self.lastname, self.firstname, self.id)
+
+
+    def __eq__(self, other):
+        return self.lastname == other.lastname and self.firstname == other.firstname and self.id == other.id
