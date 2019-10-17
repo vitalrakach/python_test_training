@@ -3,6 +3,7 @@ from model.new_contact import New_contact
 
 
 def test_edit_first_contact(app):
+
     if app.contact.count() == 0:
         app.contact.create(
             New_contact(firstname="NEW", middlename="NEW", lastname="Rakach", nickname="v1t_al", title="ZAO",
@@ -12,7 +13,11 @@ def test_edit_first_contact(app):
                         hompage="", bday="1", bmonth="October", byear="1999", aday="5", amonth="January", ayear="2000",
                         address2="minsk", phone2="", notes=""))
     old_contacts = app.contact.get_contact_list()
-    app.contact.edit_first_contact(New_contact(email2="rakach2@mail.comEDITED", aday="28"))
+    new_contact_var = New_contact(email2="rakach2@mail.comEDITED", aday="28")
+    new_contact_var.id = old_contacts[0].id
+    app.contact.edit_first_contact(new_contact_var)
     new_contacts = app.contact.get_contact_list()
     assert len(old_contacts) == len(new_contacts)
+    old_contacts[0] = new_contact_var
+    assert sorted(old_contacts, key=New_contact.id_or_max) == sorted(new_contacts, key=New_contact.id_or_max)
 
