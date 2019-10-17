@@ -8,10 +8,12 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+
     def open_add_contact_page(self):
         # open add new page
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
+
 
     def create(self, new_contact):
         # create contact
@@ -23,6 +25,8 @@ class ContactHelper:
         wd.find_element_by_xpath(
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
         self.app.open_home_page()
+        self.contact_cache = None
+
 
     def fill_contact_form(self, new_contact):
         wd = self.app.wd
@@ -55,6 +59,7 @@ class ContactHelper:
         self.change_field_value("phone2", new_contact.phone2)
         self.change_field_value("notes", new_contact.notes)
 
+
     def change_listbox_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
@@ -63,12 +68,14 @@ class ContactHelper:
             wd.find_element_by_xpath(
                 "(.//*[normalize-space(text()) and normalize-space(.)='Birthday:'])[1]/following::option[7]").click()
 
+
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
             wd.find_element_by_name(field_name).click()
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
+
 
     def delete_first(self):
         wd = self.app.wd
@@ -80,6 +87,8 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         wd.find_elements_by_css_selector("div.msgbox")
         self.app.open_home_page()
+        self.contact_cache = None
+
 
     def delete_all(self):
         wd = self.app.wd
@@ -90,8 +99,9 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@type='button' and @value='Delete']").click()
         wd.switch_to_alert().accept()
         wd.find_elements_by_css_selector("div.msgbox")
-
         self.app.open_home_page()
+#        self.contact_cache = None
+
 
     def edit_first_contact(self, new_contact):
         wd = self.app.wd
@@ -104,6 +114,8 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         # open home page
         self.app.open_home_page()
+        self.contact_cache = None
+
 
     def add_contact_to_group(self):
         wd = self.app.wd
@@ -127,15 +139,16 @@ class ContactHelper:
         return len(wd.find_elements_by_xpath('//*[@title="Edit"]'))
 
 
-
+    contact_cache = None
 
 
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_home_page()
-        contacts = []
-        for element in wd.find_elements_by_name("entry"):
-            text = element.text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(New_contact(firstname=text, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.open_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                text = element.text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(New_contact(firstname=text, id=id))
+            return list(self.contact_cache)
