@@ -97,7 +97,7 @@ class ContactHelper:
         wd.find_element_by_id('MassCB').click()
         # summit deletion for all contacts
         wd.find_element_by_xpath("//input[@type='button' and @value='Delete']").click()
-        wd.switch_to_alert().accept()
+        wd.switch_to_alert.accept()
         wd.find_elements_by_css_selector("div.msgbox")
         self.app.open_home_page()
 #        self.contact_cache = None
@@ -147,8 +147,10 @@ class ContactHelper:
             wd = self.app.wd
             self.open_home_page()
             self.contact_cache = []
-            for element in wd.find_elements_by_name("entry"):
-                text = element.text
-                id = element.find_element_by_name("selected[]").get_attribute("value")
+            for i in wd.find_elements_by_name("entry"):
+                text = i.text
+                id = i.find_element_by_name("selected[]").get_attribute("value")
                 self.contact_cache.append(New_contact(firstname=text, id=id))
-            return list(self.contact_cache)
+        return list(self.contact_cache)
+
+
