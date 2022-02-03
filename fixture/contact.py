@@ -141,7 +141,6 @@ class ContactHelper:
 
     contact_cache = None
 
-
     def get_contact_list(self):
         if self.contact_cache is None:
             wd = self.app.wd
@@ -152,5 +151,7 @@ class ContactHelper:
                 id = i.find_element_by_name("selected[]").get_attribute("value")
                 self.contact_cache.append(New_contact(firstname=text, id=id))
         return list(self.contact_cache)
+
+
 
 
